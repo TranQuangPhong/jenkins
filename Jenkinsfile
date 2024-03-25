@@ -8,9 +8,7 @@ pipeline {
 		}
 		stage('Build') {
 			steps {
-				steps {
-					sh 'mvn -B -DskipTests clean package' 
-				}
+				sh 'mvn -B -DskipTests clean package' 
 			}
 		}
 		stage('Push docker image') {
