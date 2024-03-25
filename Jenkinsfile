@@ -1,10 +1,9 @@
 pipeline {
-    agent {
-		docker {
-            image 'maven:3.9.0'
-            args '-v /root/.m2:/root/.m2'
-        }
-	}
+    agent any
+	tools {
+        maven 'maven'
+        jdk 'jdk'
+    }
 	stages {
 	    stage('Clone') {
 		    steps {
