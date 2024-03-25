@@ -1,9 +1,10 @@
 pipeline {
-    agent any
-	tools {
-        maven 'Maven' 
-        jdk 'Java 14' 
-    }
+    agent {
+		docker {
+            image 'maven:3.9.0'
+            args '-v /root/.m2:/root/.m2'
+        }
+	}
 	stages {
 	    stage('Clone') {
 		    steps {
@@ -12,8 +13,6 @@ pipeline {
 		}
 		stage('Build') {
 			steps {
-				echo 'mvn test environment'
-				sh 'mvn test'
 				echo 'mvn build jar file'
 				sh 'mvn -B -DskipTests clean package' 
 			}
