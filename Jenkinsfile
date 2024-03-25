@@ -19,7 +19,11 @@ pipeline {
 		stage('Push docker image') {
 			steps {
 				withDockerRegistry(credentialsId: 'docker-hub-with-access-token', url: 'https://index.docker.io/v1/') {
+					echo 'docker login'
+					sh 'docker login -u randomdog'
+					echo 'docker build'
 					sh 'docker build -t randomdog/jenkins:v1 .'
+					echo 'docker push'
 					sh 'docker push -t randomdog/jenkins:v1'
 				}
 			}
